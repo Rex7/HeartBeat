@@ -17,10 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/AppTheme.AppBarOverlay"
-
-
             app:navigationIcon="@drawable/ic_menu_24"
-
             app:popupTheme="@style/AppTheme.AppBarOverlay" >
 
             <TextView
@@ -90,14 +87,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="73dp"
-        android:layout_gravity="center_vertical"
-
+        android:layout_gravity="center"
         android:textAllCaps="false"
+        android:textColor="#C82727"
         android:textIsSelectable="false"
-        app:layout_anchor="@+id/waveloadingview"
-        app:layout_anchorGravity="center" />
+        android:textSize="36sp"
+        android:layout_marginLeft="95dp"
+        android:translationY="150dp"
+        />
 
     <TextureView
         android:id="@+id/textureView2"

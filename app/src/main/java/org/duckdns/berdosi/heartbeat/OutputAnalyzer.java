@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.CountDownTimer;
 import android.view.TextureView;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,10 +15,7 @@ import me.itangqi.waveloadingview.WaveLoadingView;
 
 class OutputAnalyzer {
     private final Activity activity;
-
-    private final ChartDrawer chartDrawer;
-
-    private float pulse;
+       private float pulse;
     private MeasureStore store;
 
     private final int measurementInterval = 45;
@@ -32,9 +30,9 @@ class OutputAnalyzer {
     private CountDownTimer timer;
 
 
-    OutputAnalyzer(Activity activity, TextureView graphTextureView) {
+    OutputAnalyzer(Activity activity) {
         this.activity = activity;
-        this.chartDrawer = new ChartDrawer(graphTextureView);
+
 
     }
 
@@ -197,6 +195,9 @@ class OutputAnalyzer {
 //                ((EditText) activity.findViewById(R.id.editText)).setText(returnValueSb.toString());
 
                 cameraService.stop();
+                ( activity.findViewById(R.id.start)).setVisibility(View.INVISIBLE);
+                (activity.findViewById(R.id.waveloadingview)).setVisibility(View.INVISIBLE);
+                (activity.findViewById(R.id.textView)).setTranslationY(80);
             }
         };
 

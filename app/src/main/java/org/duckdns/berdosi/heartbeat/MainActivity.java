@@ -28,7 +28,6 @@ import me.itangqi.waveloadingview.WaveLoadingView;
 
 public class MainActivity extends AppCompatActivity {
     private final CameraService cameraService = new CameraService(this);
-    PulseView pulseView;
     private OutputAnalyzer analyzer;
     private Toolbar toolbar;
     private TextView start;
@@ -40,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        analyzer = new OutputAnalyzer(this, findViewById(R.id.graphTextureView));
-//        pulseView = (PulseView) findViewById(R.id.anime);
-        start= (TextView)findViewById(R.id.start);
+        analyzer = new OutputAnalyzer(this);
+
+        start= findViewById(R.id.start);
         TextureView cameraTextureView = findViewById(R.id.textureView2);
        waveLoadingView=findViewById(R.id.waveloadingview);
-//        waveLoadingView.setProgressValue(0);
+
         SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
 
         start.setOnLongClickListener(new View.OnLongClickListener() {
@@ -83,16 +82,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        if (previewSurfaceTexture != null) {
-//            // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
-//            Surface previewSurface = new Surface(previewSurfaceTexture);
-//
-//            cameraService.start(previewSurface);
-//            analyzer.measurePulse(cameraTextureView, cameraService);
-//            pulseView.startPulse();
-//        }
     }
 
     @Override
@@ -100,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         cameraService.stop();
         if (analyzer != null) analyzer.stop();
-        analyzer = new OutputAnalyzer(this, findViewById(R.id.graphTextureView));
-//        pulseView.finishPulse();
+        analyzer = new OutputAnalyzer(this);
 
 
     }
