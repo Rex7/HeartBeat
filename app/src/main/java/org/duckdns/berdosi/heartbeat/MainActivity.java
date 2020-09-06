@@ -1,6 +1,7 @@
 package org.duckdns.berdosi.heartbeat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.TextureView;
 import android.view.Surface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView start;
     private boolean isSpeakButtonLongPressed = false;
     WaveLoadingView waveLoadingView;
-
+    Button Result;
 
     @Override
     protected void onResume() {
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         start= findViewById(R.id.start);
         TextureView cameraTextureView = findViewById(R.id.textureView2);
-       waveLoadingView=findViewById(R.id.waveloadingview);
+        waveLoadingView=findViewById(R.id.waveloadingview);
 
         SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
 
@@ -98,11 +100,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Result=(Button) findViewById(R.id.view_result);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Result.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                          // TODO Auto-generated method stub
+                                          Intent i = new Intent(MainActivity.this,Result.class);
+                                          startActivity(i);
+                                      }
+                                  }
 
+        );
 
         int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
         ActivityCompat.requestPermissions(this,
