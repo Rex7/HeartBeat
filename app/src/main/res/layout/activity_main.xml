@@ -33,22 +33,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
-<!--    <com.gigamole.library.PulseView-->
-<!--        android:id="@+id/anime"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:pv_alpha="70"-->
-<!--        app:pv_color="#F8879D"-->
-<!--        app:pv_icon="@drawable/heart"-->
-<!--        app:pv_icon_height="100dp"-->
-<!--        app:pv_icon_width="100dp"-->
-<!--        app:pv_interpolator="@android:anim/linear_interpolator"-->
-<!--        app:pv_measure="height"-->
-<!--        app:pv_spawn_period="500"-->
-<!--        android:layout_gravity="center" >-->
-<!--    </com.gigamole.library.PulseView>-->
-
     <me.itangqi.waveloadingview.WaveLoadingView
         android:id="@+id/waveloadingview"
         android:layout_width="255dp"

@@ -141,6 +141,14 @@
     <!--        app:wlv_titleTopStrokeColor="@color/holo_blue_dark"-->
     <!--        app:wlv_titleTopStrokeWidth="3dp"-->
     <!--        app:wlv_titleTopColor="@android:color/white"-->
+    <Button
+        android:id="@+id/view_result"
+        android:layout_width="150dp"
+        android:layout_height="73dp"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:text="ViewResult" />
+
 
 
 
