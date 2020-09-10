@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView start;
     private boolean isSpeakButtonLongPressed = false;
     WaveLoadingView waveLoadingView;
-    Button Result;
+
 
     @Override
     protected void onResume() {
@@ -100,20 +100,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Result=(Button) findViewById(R.id.view_result);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Button result =findViewById(R.id.view_result);
+        result.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), ResultView.class);
+                startActivityForResult(myIntent, 0);
+            }
 
-        Result.setOnClickListener(new View.OnClickListener() {
-                                      @Override
-                                      public void onClick(View v) {
-                                          // TODO Auto-generated method stub
-                                          Intent i = new Intent(MainActivity.this,Result.class);
-                                          startActivity(i);
-                                      }
-                                  }
+        });
 
-        );
 
         int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
         ActivityCompat.requestPermissions(this,
