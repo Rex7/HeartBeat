@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        Button result =findViewById(R.id.view_result);
+        result.setVisibility(View.GONE);
         analyzer = new OutputAnalyzer(this);
 
         start= findViewById(R.id.start);
@@ -60,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                     analyzer.measurePulse(cameraTextureView, cameraService);
 //                    pulseView.startPulse();
                     waveLoadingView.startAnimation();
+
+                    result.setVisibility(View.VISIBLE);
+                    result.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View view) {
+                            Intent myIntent = new Intent(view.getContext(), ResultView.class);
+                            startActivityForResult(myIntent, 0);
+                        }
+
+                    });
 
                 }
                 isSpeakButtonLongPressed = true;
@@ -84,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     @Override
@@ -102,14 +115,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Button result =findViewById(R.id.view_result);
-        result.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), ResultView.class);
-                startActivityForResult(myIntent, 0);
-            }
 
-        });
 
 
         int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;

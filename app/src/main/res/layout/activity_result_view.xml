@@ -2,23 +2,27 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".ResultView">
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/process1"
         android:src="@drawable/processed1" />
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="450dp"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/process2"
         android:src="@drawable/processed2" />
 </androidx.appcompat.widget.LinearLayoutCompat>

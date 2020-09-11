@@ -89,7 +89,8 @@
         android:layout_height="73dp"
         android:layout_gravity="bottom"
         android:clickable="true"
-        android:text="ViewResult" />
+        android:text="ViewResult"
+        />
 
     <TextureView
         android:id="@+id/textureView2"
