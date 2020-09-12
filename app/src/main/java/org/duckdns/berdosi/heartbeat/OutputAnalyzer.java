@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.CountDownTimer;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -21,10 +20,10 @@ class OutputAnalyzer {
     private final int measurementInterval = 45;
     private final int measurementLength = 15000; // ensure the number of data points is the power of two
     private final int clipLength = 3500;
-    public String currentValue;
+    private String currentValue;
     private int detectedValleys = 0;
     private int ticksPassed = 0;
-    int calc;
+    private int calc;
     private final CopyOnWriteArrayList<Long> valleys = new CopyOnWriteArrayList<>();
 
     private CountDownTimer timer;
@@ -86,7 +85,7 @@ class OutputAnalyzer {
                     // max int is 2^31 (2147483647) , so width and height can be at most 2^11,
                     // as 2^8 * 2^11 * 2^11 = 2^30, just below the limit
 
-                    int finalMeasurement = measurement;
+
 
                     store.add(measurement);
 
@@ -106,15 +105,12 @@ class OutputAnalyzer {
 
                         pulse=60f * (detectedValleys - 1) / (Math.max(1, (valleys.get(valleys.size() - 1) - valleys.get(0)) / 1000f));
                         ((TextView) activity.findViewById(R.id.textView)).setText(currentValue);
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //Your code
+                        activity.runOnUiThread(() -> {
+                            //Your code
 
-                                ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setProgressValue((int) pulse);
-                            ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setCenterTitle(String.valueOf(pulse));
+                            ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setProgressValue((int) pulse);
+                        ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setCenterTitle(String.valueOf(pulse));
 
-                            }
                         });
 
 
@@ -142,37 +138,16 @@ class OutputAnalyzer {
                 pulse=60f * (detectedValleys - 1) / (Math.max(1, (valleys.get(valleys.size() - 1) - valleys.get(0)) / 1000f));
 
                 ((TextView) activity.findViewById(R.id.textView)).setText(currentValue);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Your code
-                        ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setProgressValue((int) pulse);
-                            ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setCenterTitle(String.valueOf(pulse));
+                activity.runOnUiThread(() -> {
+                    //Your code
+                    ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setProgressValue((int) pulse);
+                        ((WaveLoadingView) activity.findViewById(R.id.waveloadingview)).setCenterTitle(String.valueOf(pulse));
 
-                    }
                 });
 
                 StringBuilder returnValueSb = new StringBuilder();
                 returnValueSb.append(currentValue);
                 returnValueSb.append(activity.getString(R.string.row_separator));
-
-                // look for "drops" of 0.15 - 0.75 in the value
-                // a drop may take 2-3 ticks.
-                // int dropCount = 0;
-                // for (int stdValueIdx = 4; stdValueIdx < stdValues.size(); stdValueIdx++) {
-                //     if (((stdValues.get(stdValueIdx - 2).measurement - stdValues.get(stdValueIdx).measurement) > dropHeight) &&
-                //             !((stdValues.get(stdValueIdx - 3).measurement - stdValues.get(stdValueIdx - 1).measurement) > dropHeight) &&
-                //            !((stdValues.get(stdValueIdx - 4).measurement - stdValues.get(stdValueIdx - 2).measurement) > dropHeight)
-                //    ) {
-                //        dropCount++;
-                //    }
-                // }
-
-                // returnValueSb.append(activity.getString(R.string.detected_pulse));
-                // returnValueSb.append(activity.getString(R.string.separator));
-                // returnValueSb.append((float) dropCount / ((float) (measurementLength - clipLength) / 1000f / 60f));
-                // returnValueSb.append(activity.getString(R.string.row_separator));
-
                 returnValueSb.append(activity.getString(R.string.raw_values));
                 returnValueSb.append(activity.getString(R.string.row_separator));
 
@@ -192,12 +167,15 @@ class OutputAnalyzer {
                     returnValueSb.append(activity.getString(R.string.row_separator));
                 }
 
-//                ((EditText) activity.findViewById(R.id.editText)).setText(returnValueSb.toString());
+
 
                 cameraService.stop();
                 ( activity.findViewById(R.id.start)).setVisibility(View.INVISIBLE);
                 (activity.findViewById(R.id.waveloadingview)).setVisibility(View.INVISIBLE);
-                (activity.findViewById(R.id.textView)).setTranslationY(80);
+                (activity.findViewById(R.id.showResult)).setVisibility(View.VISIBLE);
+                ((TextView) activity.findViewById(R.id.textView)).setText(currentValue);
+
+
             }
         };
 
