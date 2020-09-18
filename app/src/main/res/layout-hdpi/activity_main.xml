@@ -83,6 +83,15 @@
         android:layout_marginLeft="5dp"
         android:translationY="150dp"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:visibility="invisible"
+        android:layout_width="374dp"
+        android:layout_height="178dp"
+        android:translationY="300dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextureView
         android:id="@+id/textureView2"

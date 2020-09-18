@@ -18,12 +18,10 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.gigamole.library.PulseView;
-import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.heartbeat.suggestion.ParentAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +31,26 @@ public class MainActivity extends AppCompatActivity {
     private TextView start;
     private boolean isSpeakButtonLongPressed = false;
     WaveLoadingView waveLoadingView;
+    RecyclerView parentRecycler;
+    ParentAdapter parentAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        parentRecycler=findViewById(R.id.main_recyclerview);
+        parentRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        parentRecycler.setHasFixedSize(true);
 
 
+
+        int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -94,20 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
-
-        int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA},
-                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-    }
 
 }

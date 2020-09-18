@@ -100,8 +100,15 @@
         android:layout_width="32dp"
         android:layout_height="32dp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:visibility="invisible"
+        android:layout_width="374dp"
+        android:layout_height="178dp"
+        android:translationY="400dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

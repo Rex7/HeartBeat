@@ -112,6 +112,15 @@
         android:id="@+id/textureView2"
         android:layout_width="32dp"
         android:layout_height="32dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:translationY="250dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 

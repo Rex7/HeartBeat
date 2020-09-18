@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="redmi"
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title" />
 
@@ -46,7 +46,6 @@
         app:wlv_round_rectangle="true"
         app:wlv_shapeType="circle"
         app:wlv_titleCenterColor="@android:color/white"
-
         app:wlv_titleCenterSize="24sp"
         app:wlv_titleCenterStrokeColor="@color/holo_blue_dark"
         app:wlv_titleCenterStrokeWidth="3dp"
@@ -71,7 +70,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/showResult"
         android:layout_width="250dp"
-        android:translationY="300dp"
+        android:translationY="100dp"
         android:backgroundTintMode="src_in"
         android:visibility="invisible"
         android:layout_marginLeft="65dp"
@@ -97,6 +96,16 @@
         android:id="@+id/textureView2"
         android:layout_width="32dp"
         android:layout_height="32dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:translationY="205dp"
+        android:visibility="invisible"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
