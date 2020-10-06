@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <RelativeLayout
+            android:id="@+id/month_relative"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#DAD7D7">
+
+            <TextView
+                android:id="@+id/month_show_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="21dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/Month"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/month_relative">
+            <View
+                android:id="@+id/border_item_month"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <ImageView
+                android:id="@+id/heartsymbol"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_favorite_black_24dp" />
+
+            <TextView
+                android:id="@+id/month_item_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/heartrate_history_item"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/heartrate_history_item"
+                android:text="@string/Month"
+                android:textSize="21sp" />
+
+            <TextView
+
+                android:id="@+id/heartrate_history_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_toRightOf="@+id/heartsymbol"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/heartrate"
+                android:textColor="#666666"
+                android:textSize="21sp" />
+
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grey" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
