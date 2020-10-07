@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.regischarles.sometodo.Todo">
+    <item
+        android:id="@+id/home"
+        android:orderInCategory="100"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/history"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="@string/history"
+        />
+</menu>

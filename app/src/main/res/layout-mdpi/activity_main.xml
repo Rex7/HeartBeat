@@ -1,115 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
 
-    tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        tools:context=".MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:navigationIcon="@drawable/ic_menu_24"
-            app:popupTheme="@style/AppTheme.AppBarOverlay" >
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:layout_gravity="center"
-                android:id="@+id/toolbar_title" />
-
-        </androidx.appcompat.widget.Toolbar>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-    <me.itangqi.waveloadingview.WaveLoadingView
-        android:id="@+id/waveloadingview"
-        android:layout_width="255dp"
-        android:layout_height="201dp"
-        android:layout_gravity="center"
-        app:layout_anchorGravity="bottom"
-        app:pv_icon_height="100dp"
-        app:pv_icon_width="100dp"
-        app:wlv_borderColor="@color/colorAccent"
-        app:wlv_borderWidth="3dp"
-        app:wlv_round_rectangle="true"
-        app:wlv_shapeType="circle"
-        app:wlv_titleCenterColor="@android:color/white"
 
-        app:wlv_titleCenterSize="24sp"
-        app:wlv_titleCenterStrokeColor="@color/holo_blue_dark"
-        app:wlv_titleCenterStrokeWidth="3dp"
-        app:wlv_triangle_direction="north"
-        app:wlv_waveAmplitude="70"
-        app:wlv_waveColor="@color/colorAccent" />
 
-    <TextView
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_below="@+id/waveloadingview"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/tap"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/showResult"
-        android:layout_width="200dp"
-        android:translationY="200dp"
-        android:backgroundTintMode="src_in"
-        android:visibility="invisible"
-        android:layout_marginStart="60dp"
-        app:cardElevation="2dp"
-        android:layout_height="100dp">
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="200dp"
-            android:layout_height="73dp"
+        <me.itangqi.waveloadingview.WaveLoadingView
+            android:id="@+id/waveloadingview"
+            android:layout_width="255dp"
+            android:layout_height="201dp"
             android:layout_gravity="center"
-            android:textAllCaps="false"
-            android:textColor="#C82727"
-            android:textIsSelectable="false"
-            android:textSize="36sp"
+            app:layout_anchorGravity="bottom"
+            app:pv_icon_height="100dp"
+            app:pv_icon_width="100dp"
+            app:wlv_borderColor="@color/colorAccent"
+            app:wlv_borderWidth="3dp"
+            app:wlv_round_rectangle="true"
+            app:wlv_shapeType="circle"
+            app:wlv_titleCenterColor="@android:color/white"
+
+            app:wlv_titleCenterSize="24sp"
+            app:wlv_titleCenterStrokeColor="@color/holo_blue_dark"
+            app:wlv_titleCenterStrokeWidth="3dp"
+            app:wlv_triangle_direction="north"
+            app:wlv_waveAmplitude="70"
+            app:wlv_waveColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_below="@+id/waveloadingview"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/tap"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/showResult"
+            android:layout_width="250dp"
+            android:translationY="280dp"
+            android:visibility="invisible"
+            android:layout_marginStart="80dp"
+            app:cardElevation="2dp"
+            android:layout_height="180dp">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textColor="#C82727"
+                android:textIsSelectable="false"
+                android:textSize="36sp"
 
 
-            />
+                />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextureView
-        android:id="@+id/textureView2"
-        android:layout_width="32dp"
-        android:layout_height="32dp" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_recyclerview"
-        android:visibility="invisible"
-        android:layout_width="374dp"
-        android:layout_height="178dp"
-        android:translationY="200dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.cardview.widget.CardView>
 
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextureView
+            android:id="@+id/textureView2"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recyclerview"
+            android:visibility="invisible"
+            android:layout_width="374dp"
+            android:layout_height="178dp"
+            android:translationY="400dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/menu_laun"
+        android:layout_gravity="start">
+
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
 

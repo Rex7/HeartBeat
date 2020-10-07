@@ -1,5 +1,7 @@
 package com.heartbeat;
 
+import java.util.Comparator;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -38,4 +40,5 @@ public class HeartBeat {
     public void setDay_of_month(int day_of_month) {
         this.day_of_month = day_of_month;
     }
+
 }

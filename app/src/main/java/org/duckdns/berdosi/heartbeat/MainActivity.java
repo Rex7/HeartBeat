@@ -1,16 +1,19 @@
 package org.duckdns.berdosi.heartbeat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.TextureView;
 import android.view.Surface;
@@ -19,12 +22,16 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 
+import com.google.android.material.navigation.NavigationView;
+import com.heartbeat.history.HistoryActivity;
 import com.heartbeat.suggestion.ParentAdapter;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final CameraService cameraService = new CameraService(this);
     private OutputAnalyzer analyzer;
     private Toolbar toolbar;
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     WaveLoadingView waveLoadingView;
     RecyclerView parentRecycler;
     ParentAdapter parentAdapter;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        drawerLayout =  findViewById(R.id.drawer);
+        navigationView=findViewById(R.id.navView);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open_navigation, R.string.close_navigation);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        navigationView.setNavigationItemSelectedListener(this);
         parentRecycler=findViewById(R.id.main_recyclerview);
         parentRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         parentRecycler.setHasFixedSize(true);
@@ -111,6 +127,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
 
+            case R.id.history:
+                startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
+                break;
+            case R.id.home:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
 
+        }
+        return true;
+    }
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
 }
