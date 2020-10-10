@@ -7,5 +7,6 @@
     <string name="history">History</string>
     <string name="open_navigation">open</string>
     <string name="close_navigation">close</string>
-    <string name="Month">Sept</string> />
+    <string name="Month">Sept</string>
+    />
 </resources>

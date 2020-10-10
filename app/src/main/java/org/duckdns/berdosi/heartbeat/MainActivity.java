@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.heartbeat.history.HistoryActivity;
 import com.heartbeat.suggestion.ParentAdapter;
+import com.jjoe64.graphview.GraphView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
