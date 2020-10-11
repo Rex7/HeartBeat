@@ -80,24 +80,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
 
-        start.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View pView) {
-                if (previewSurfaceTexture != null) {
-                    // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
-                    Surface previewSurface = new Surface(previewSurfaceTexture);
+        start.setOnLongClickListener(pView -> {
+            if (previewSurfaceTexture != null) {
+                // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
+                Surface previewSurface = new Surface(previewSurfaceTexture);
 
-                    cameraService.start(previewSurface);
-                    analyzer.measurePulse(cameraTextureView, cameraService);
+                cameraService.start(previewSurface);
+                analyzer.measurePulse(cameraTextureView, cameraService);
 //                    pulseView.startPulse();
-                    waveLoadingView.startAnimation();
+                waveLoadingView.startAnimation();
 
-                }
-                isSpeakButtonLongPressed = true;
-                return false;
             }
-
-
+            isSpeakButtonLongPressed = true;
+            return false;
         });
         start.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -137,6 +132,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.home:
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+            case R.id.dashboard:
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
                 break;
 
         }

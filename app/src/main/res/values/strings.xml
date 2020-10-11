@@ -8,5 +8,6 @@
     <string name="open_navigation">open</string>
     <string name="close_navigation">close</string>
     <string name="Month">Sept</string>
+    <string name="dashboard">Dashboard</string>
     />
 </resources>

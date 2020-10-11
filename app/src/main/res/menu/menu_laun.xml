@@ -15,4 +15,9 @@
         android:icon="@drawable/ic_history_black_24dp"
         android:title="@string/history"
         />
+    <item
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/dashboard"
+        android:id="@+id/dashboard"/>
+
 </menu>

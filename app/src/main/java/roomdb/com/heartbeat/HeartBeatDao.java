@@ -8,7 +8,11 @@ import androidx.room.Query;
 @Dao
 public interface HeartBeatDao {
     @Insert
-    public void insert(HeartBeat ... heartBeat);
+     void insert(HeartBeat ... heartBeat);
     @Query("select * from heartbeat")
-    public List<HeartBeat> getAllResult();
+     List<HeartBeat> getAllResult();
+    @Query("select count(id) as rowcount from  HeartBeat")
+     int getRowCount();
+    @Query("SELECT * from  HeartBeat order by day_of_month ASC")
+     List<HeartBeat> getSorted();
 }
