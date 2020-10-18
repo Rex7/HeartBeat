@@ -199,7 +199,7 @@ class OutputAnalyzer {
                 heartBeat.setHeartbeat(currentValue);
                 Calendar calendar=Calendar.getInstance();
                 heartBeat.setMonth(calendar.get(Calendar.MONTH));
-                heartBeat.setDay_of_month((calendar.get(Calendar.DAY_OF_MONTH))+1);
+                heartBeat.setDay_of_month((calendar.get(Calendar.DAY_OF_MONTH)));
                 heartBeatDao.insert(heartBeat);
                 List<HeartBeat> getAllResult = heartBeatDao.getAllResult();
                 Log.v("Babe","Data"+getAllResult.get(2).heartbeat);

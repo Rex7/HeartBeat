@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    app:cardElevation="4dp"
+
+    android:layout_height="120dp">
+    <RelativeLayout
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/no_of_clothes_item"
+            android:text=""
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="50dp"
+            android:textSize="21sp"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="130dp"
+            android:background="#B3B3B3"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/cost_of_clothes_item"
+            android:text=""
+            android:layout_marginTop="40dp"
+            android:textSize="21sp"
+            android:textColor="#2196F3"
+            android:background="#B3B3B3"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_toEndOf="@+id/no_of_clothes_item" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

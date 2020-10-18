@@ -3,7 +3,9 @@ package com.heartbeat.history;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.heartbeat.HeartBeat;
 import com.heartbeat.HeartBeatImp;
@@ -33,7 +35,7 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle actionBarDrawerToggle;
-
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
         setSupportActionBar(toolbar);
         drawerLayout =  findViewById(R.id.drawer);
         navigationView=findViewById(R.id.navView);
+        shimmerFrameLayout=findViewById(R.id.shimmer_layout);
+        shimmerFrameLayout.startShimmer();
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_navigation, R.string.close_navigation);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -53,9 +57,14 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
         Collections.sort(heartBeats, new SortMonth());
         ArrayList<HeartBeat> heartBeatArrayList= new ArrayList<>( heartBeats);
         historyAdapter=new HistoryAdapter(getApplicationContext(),heartBeatArrayList);
-        recyclerView.setAdapter(historyAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator( new DefaultItemAnimator());
+        recyclerView.setAdapter(historyAdapter);
+        // stopping shimmer and show data
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -74,5 +83,17 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
     }
 }

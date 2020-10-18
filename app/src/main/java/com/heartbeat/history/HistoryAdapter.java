@@ -46,15 +46,15 @@ public class HistoryAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int month = heartBeatArrayList.get(position).getMonth() + 1;
         if (holder.getItemViewType() == dateChange) {
-            ((DateViewholder) holder).date.setText("" + months[month - 1]);
-            ((DateViewholder) holder).heartrate.setText("" + heartBeatArrayList.get(position).getHeartbeat() + " " + "HP");
-            ((DateViewholder) holder).month.setText(" " + month);
+            ((DateViewholder) holder).date.setText(months[month - 1]);
+            ((DateViewholder) holder).heartrate.setText(ctx.getResources().getString(R.string.heart_rate_with_hp,heartBeatArrayList.get(position).getHeartbeat()));
+            ((DateViewholder) holder).month.setText(ctx.getResources().getString(R.string.day,heartBeatArrayList.get(position).getDay_of_month()));
 
 
         } else {
-            ((ViewHolders) holder).heartbeat.setText(heartBeatArrayList.get(position).getHeartbeat() + " " + "HP");
+            ((ViewHolders) holder).heartbeat.setText(ctx.getResources().getString(R.string.heart_rate_with_hp,heartBeatArrayList.get(position).getHeartbeat()));
             //month starts from 0 to 11
-            ((ViewHolders) holder).month.setText("" + month);
+            ((ViewHolders) holder).day.setText(ctx.getResources().getString(R.string.day,heartBeatArrayList.get(position).getDay_of_month()));
         }
     }
 
@@ -84,13 +84,13 @@ public class HistoryAdapter extends RecyclerView.Adapter {
 
     static class ViewHolders extends RecyclerView.ViewHolder {
         Context ctx;
-        TextView heartbeat, month;
+        TextView heartbeat, day;
 
         ViewHolders(@NonNull View itemView, Context ctx) {
             super(itemView);
             this.ctx = ctx;
             heartbeat = itemView.findViewById(R.id.heartrate_history);
-            month = itemView.findViewById(R.id.month);
+            day = itemView.findViewById(R.id.dayofmonth);
         }
     }
 

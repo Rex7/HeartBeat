@@ -13,11 +13,7 @@
     android:layout_height="match_parent"
     tools:context="com.heartbeat.history.HistoryActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbar_history" />
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_history"
@@ -32,6 +28,36 @@
             />
 
     </com.google.android.material.appbar.AppBarLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_below="@+id/appbar_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                layout="@layout/history_shimmer"/>
+            <include
+                layout="@layout/history_shimmer"/>
+            <include
+                layout="@layout/history_shimmer"/>
+            <include
+                layout="@layout/history_shimmer"/>
+            <include
+                layout="@layout/history_shimmer"/>
+            <include
+                layout="@layout/history_shimmer"/>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/appbar_history" />
 
 </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
