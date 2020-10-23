@@ -8,6 +8,7 @@
     <string name="text_label_2">Statistics</string>
     <string name="tap">long press</string>
     <string name="heart_rate_with_hp">%1$s HP</string>
+    <string name="heart_rate_with_hp_integer">%1$d HP</string>
     <string name="day"> %1$d</string>
 
     <plurals name="measurement_output_template">

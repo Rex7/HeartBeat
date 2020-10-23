@@ -192,7 +192,6 @@ class OutputAnalyzer {
                  recyclerView.setVisibility(View.VISIBLE);
                 recyclerView.setAdapter(parentAdapter);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-
                 ((TextView) activity.findViewById(R.id.textView)).setText(currentValue);
                 HeartBeatDao heartBeatDao=HeartBeatImp.getDatabase(activity.getApplicationContext()).heartbeatDao();
                 HeartBeat heartBeat=new HeartBeat();

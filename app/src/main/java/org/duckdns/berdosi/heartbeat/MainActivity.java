@@ -3,29 +3,28 @@ package org.duckdns.berdosi.heartbeat;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.SurfaceTexture;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.TextureView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
+import com.heartbeat.dashboard.Dashboard;
+import com.heartbeat.history.HistoryActivity;
+import com.heartbeat.suggestion.ParentAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-
-
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.TextureView;
-import android.view.Surface;
-import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TextView;
-
-
-import com.google.android.material.navigation.NavigationView;
-import com.heartbeat.history.HistoryActivity;
-import com.heartbeat.suggestion.ParentAdapter;
-
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,16 +49,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawerLayout =  findViewById(R.id.drawer);
-        navigationView=findViewById(R.id.navView);
+        drawerLayout = findViewById(R.id.drawer);
+        navigationView = findViewById(R.id.navView);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_navigation, R.string.close_navigation);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView.setNavigationItemSelectedListener(this);
-        parentRecycler=findViewById(R.id.main_recyclerview);
-        parentRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        parentRecycler = findViewById(R.id.main_recyclerview);
+        parentRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         parentRecycler.setHasFixedSize(true);
-
 
 
         int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
@@ -67,29 +65,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new String[]{Manifest.permission.CAMERA},
                 MY_PERMISSIONS_REQUEST_READ_CONTACTS);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-
         analyzer = new OutputAnalyzer(this);
-
-        start= findViewById(R.id.start);
+        start = findViewById(R.id.start);
         TextureView cameraTextureView = findViewById(R.id.textureView2);
-       waveLoadingView=findViewById(R.id.waveloadingview);
-
+        waveLoadingView = findViewById(R.id.waveloadingview);
         SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
 
         start.setOnLongClickListener(new View.OnLongClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public boolean onLongClick(View pView) {
-                if (previewSurfaceTexture != null) {
-                    // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
-                    Surface previewSurface = new Surface(previewSurfaceTexture);
-
-                    cameraService.start(previewSurface);
-                    analyzer.measurePulse(cameraTextureView, cameraService);
+                HeartSensorCheck heartSensorCheck = new HeartSensorCheck(getApplicationContext());
+                if (heartSensorCheck.checkHeartSensor()) {
+                    Log.v("HeartSensor", "Status" + heartSensorCheck.checkHeartSensor());
+                } else {
+                    Log.v("HeartSensor", "Status" + heartSensorCheck.checkHeartSensor());
+                    if (previewSurfaceTexture != null) {
+                        // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
+                        Surface previewSurface = new Surface(previewSurfaceTexture);
+                        cameraService.start(previewSurface);
+                        analyzer.measurePulse(cameraTextureView, cameraService);
 //                    pulseView.startPulse();
-                    waveLoadingView.startAnimation();
+                        waveLoadingView.startAnimation();
+
+                    }
 
                 }
                 isSpeakButtonLongPressed = true;
@@ -129,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.history:
                 startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
@@ -137,10 +140,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.home:
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
+            case R.id.dashboard_menu:
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                break;
 
         }
         return true;
     }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

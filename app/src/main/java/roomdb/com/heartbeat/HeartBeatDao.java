@@ -11,4 +11,6 @@ public interface HeartBeatDao {
     public void insert(HeartBeat ... heartBeat);
     @Query("select * from heartbeat")
     public List<HeartBeat> getAllResult();
+    @Query("SELECT * from  HeartBeat order by day_of_month ASC")
+    List<HeartBeat> getSorted();
 }
