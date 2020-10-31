@@ -10,6 +10,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.heartbeat.HeartBeat;
 import com.heartbeat.HeartBeatImp;
 import com.heartbeat.SortMonth;
+import com.heartbeat.dashboard.Dashboard;
 
 import org.duckdns.berdosi.heartbeat.MainActivity;
 import org.duckdns.berdosi.heartbeat.R;
@@ -41,24 +42,24 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        recyclerView=findViewById(R.id.recyclerview_history);
-        toolbar=findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recyclerview_history);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawerLayout =  findViewById(R.id.drawer);
-        navigationView=findViewById(R.id.navView);
-        shimmerFrameLayout=findViewById(R.id.shimmer_layout);
+        drawerLayout = findViewById(R.id.drawer);
+        navigationView = findViewById(R.id.navView);
+        shimmerFrameLayout = findViewById(R.id.shimmer_layout);
         shimmerFrameLayout.startShimmer();
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.open_navigation, R.string.close_navigation);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         navigationView.setNavigationItemSelectedListener(this);
-        HeartBeatImp heartBeatImp=HeartBeatImp.getDatabase(getApplicationContext());
-        List<HeartBeat> heartBeats=heartBeatImp.heartbeatDao().getAllResult();
+        HeartBeatImp heartBeatImp = HeartBeatImp.getDatabase(getApplicationContext());
+        List<HeartBeat> heartBeats = heartBeatImp.heartbeatDao().getAllResult();
         Collections.sort(heartBeats, new SortMonth());
-        ArrayList<HeartBeat> heartBeatArrayList= new ArrayList<>( heartBeats);
-        historyAdapter=new HistoryAdapter(getApplicationContext(),heartBeatArrayList);
+        ArrayList<HeartBeat> heartBeatArrayList = new ArrayList<>(heartBeats);
+        historyAdapter = new HistoryAdapter(getApplicationContext(), heartBeatArrayList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setItemAnimator( new DefaultItemAnimator());
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(historyAdapter);
         // stopping shimmer and show data
         shimmerFrameLayout.stopShimmer();
@@ -69,16 +70,20 @@ public class HistoryActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.history:
                 startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
                 break;
             case R.id.home:
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
+            case R.id.dashboard_menu:
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                break;
         }
         return true;
     }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

@@ -3,6 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    <include
+        android:id="@+id/toolbar_dashboard"
+        layout="@layout/toolbar"
+        app:layout_scrollFlags="scroll|enterAlways" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/body_dashboard"
+        android:layout_below="@+id/appbar_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
 
     <androidx.cardview.widget.CardView
@@ -83,10 +101,11 @@
         android:layout_marginTop="250dp"
         app:cardCornerRadius="6dp">
 
-        <com.jjoe64.graphview.GraphView
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="400dp" />
 
     </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </RelativeLayout>

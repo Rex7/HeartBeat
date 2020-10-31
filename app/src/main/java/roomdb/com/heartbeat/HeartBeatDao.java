@@ -13,4 +13,6 @@ public interface HeartBeatDao {
     public List<HeartBeat> getAllResult();
     @Query("SELECT * from  HeartBeat order by day_of_month ASC")
     List<HeartBeat> getSorted();
+    @Query("SELECT * from  HeartBeat  where month=9 order by day_of_month ASC")
+    List<HeartBeat> getMonthSorted();
 }
