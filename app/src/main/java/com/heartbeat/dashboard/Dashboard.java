@@ -1,5 +1,6 @@
 package com.heartbeat.dashboard;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,12 +43,8 @@ public class Dashboard extends AppCompatActivity implements OnChartGestureListen
         setContentView(R.layout.dashboard_design);
         toolbar = findViewById(R.id.toolbar_dashboard);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        //back arrow navigation
+        toolbar.setNavigationOnClickListener(v -> finish());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         lowest = findViewById(R.id.showLowest);
         highest_textview = findViewById(R.id.showHighest);
@@ -55,7 +52,17 @@ public class Dashboard extends AppCompatActivity implements OnChartGestureListen
         graph.setOnChartGestureListener(this);
         graph.setDragEnabled(true);
         graph.setScaleEnabled(true);
-        LineDataSet graphData = new LineDataSet(getData(), "Data Heart");
+        LineDataSet graphData = new LineDataSet(getData(), "HeartBeat : BP");
+
+        //Customizing graph
+        graphData.setFillAlpha(110);
+        graphData.setColor(Color.RED);
+        graphData.setLineWidth(3f);
+        graphData.setValueTextSize(10f);
+
+        //disabling right axis
+        graph.getAxisRight().setEnabled(false);
+
         ArrayList<ILineDataSet> dataSetArrayList = new ArrayList<>();
         dataSetArrayList.add(graphData);
         LineData lineData = new LineData(dataSetArrayList);
@@ -89,14 +96,13 @@ public class Dashboard extends AppCompatActivity implements OnChartGestureListen
         lowest.setText(getResources().getString(R.string.heart_rate_with_hp_integer, smallest));
         highest_textview.setText(getResources().getString(R.string.heart_rate_with_hp_integer, highest));
         for (int i = 0; i < getAllResult.size(); i++) {
-            String value = getAllResult.get(i).getHeartbeat().substring(7, 8).trim();
+            String value = getAllResult.get(i).getHeartbeat().substring(7, 9).trim();
             int newValue = Integer.parseInt(value.trim());
             dataset.add(new Entry(getAllResult.get(i).getDay_of_month(), newValue));
-            Log.v("DashboardDemo", "" + dataset.get(i).getX());
-
+            Log.v("ValueCheck", "" + dataset.get(i).getX());
+            Log.v("ValueCheck", "" + newValue);
 
         }
-
         return dataset;
 
     }
