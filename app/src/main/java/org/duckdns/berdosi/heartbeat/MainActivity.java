@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (previewSurfaceTexture != null) {
                     // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
                     Surface previewSurface = new Surface(previewSurfaceTexture);
+                    start.setAlpha(0.0f);
 
                     cameraService.start(previewSurface);
                     analyzer.measurePulse(cameraTextureView, cameraService);
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // We're only interested in anything if our speak button is currently pressed.
                     if (isSpeakButtonLongPressed) {
                         // Do something when the button is released.
+                        SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
+                        previewSurfaceTexture=null;
+                        start.setAlpha(1.0f);
                         onPause();
                         isSpeakButtonLongPressed = false;
                     }
