@@ -2,6 +2,7 @@ package org.duckdns.berdosi.heartbeat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 
@@ -85,12 +86,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (previewSurfaceTexture != null) {
                     // this first appears when we close the application and switch back - TextureView isn't quite ready at the first onResume.
                     Surface previewSurface = new Surface(previewSurfaceTexture);
-                    start.setAlpha(0.0f);
+
 
                     cameraService.start(previewSurface);
-                    analyzer.measurePulse(cameraTextureView, cameraService);
+                    Bitmap currentBitmap = cameraTextureView.getBitmap();
+                    int pixelCount = cameraTextureView.getWidth() * cameraTextureView.getHeight();
+                    int measurement = 0;
+                    int[] pixels = new int[pixelCount];
+                    currentBitmap.getPixels(pixels, 0, cameraTextureView.getWidth(), 0, 0, cameraTextureView.getWidth(), cameraTextureView.getHeight());
+
+                    // extract the red component
+                    // https://developer.android.com/reference/android/graphics/Color.html#decoding
+                    for (int pixelIndex = 0; pixelIndex < pixelCount; pixelIndex++) {
+                        measurement += (pixels[pixelIndex] >> 16) & 0xff;
+                    }
+
+                    if (measurement>200) {
+                        start.setAlpha(0.0f);
+                        analyzer.measurePulse(cameraTextureView, cameraService);
 //                    pulseView.startPulse();
-                    waveLoadingView.startAnimation();
+                        waveLoadingView.startAnimation();
+                    }
 
                 }
                 isSpeakButtonLongPressed = true;
@@ -108,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (isSpeakButtonLongPressed) {
                         // Do something when the button is released.
                         SurfaceTexture previewSurfaceTexture = cameraTextureView.getSurfaceTexture();
-                        previewSurfaceTexture=null;
+                        previewSurfaceTexture.releaseTexImage();
                         start.setAlpha(1.0f);
                         onPause();
                         isSpeakButtonLongPressed = false;
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
+
         cameraService.stop();
         if (analyzer != null) analyzer.stop();
         analyzer = new OutputAnalyzer(this);
